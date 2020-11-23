@@ -53,6 +53,13 @@ public class Phone implements Serializable {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public Integer getNumber() {
         return number;
