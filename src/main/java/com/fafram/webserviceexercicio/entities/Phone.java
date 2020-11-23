@@ -1,5 +1,7 @@
 package com.fafram.webserviceexercicio.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbphone")
+@Table(name = "tb_phone")
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,9 +20,8 @@ public class Phone implements Serializable {
     private String type;
     private Integer number;
 
-    @ManyToOne
-    @JoinTable(name = "tb_phone_customer", joinColumns = @JoinColumn(name = "phone_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    @JsonIgnore
+    @ManyToMany(mappedBy = "phones")
     private Set<Customer> customers = new HashSet<>();
 
     public Phone() {
@@ -30,6 +31,14 @@ public class Phone implements Serializable {
         this.id = id;
         this.type = type;
         this.number = number;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 
     public static long getSerialVersionUID() {
@@ -49,26 +58,18 @@ public class Phone implements Serializable {
         return number;
     }
 
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Phone phone = (Phone) o;
-        return id.equals(phone.id) &&
-                type.equals(phone.type) &&
-                number.equals(phone.number);
+        return id.equals(phone.id);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, number);
+        return Objects.hash(id);
     }
 }

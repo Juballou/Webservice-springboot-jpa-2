@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbcustomer")
+@Table(name = "tb_customer")
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,9 +21,12 @@ public class Customer implements Serializable {
     private String email;
     private String cpf;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer")
+
+    @OneToMany
+    @JoinTable(name = "tb_customer_phone", joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "phone_id"))
     private Set<Phone> phones = new HashSet<>();
+
 
     public Set<Phone> getPhones() {
         return phones;

@@ -41,5 +41,8 @@ public class TestConfig implements CommandLineRunner {
 
         customer1.getPhones().add(pho1);
         customer1.getPhones().add(pho2);
+
+        customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3));
+
     }
 }
