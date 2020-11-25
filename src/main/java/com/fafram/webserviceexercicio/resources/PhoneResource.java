@@ -19,6 +19,7 @@ public class PhoneResource {
         @Autowired
         private PhoneService service;
 
+
         @ApiOperation(value = "Retorna uma lista de telefones")
         @ApiResponses(value = {
                 @ApiResponse(code = 200, message = "Retorna a lista de telefones"),

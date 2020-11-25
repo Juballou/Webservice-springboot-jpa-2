@@ -18,6 +18,7 @@ public class CustomerResource {
     @Autowired
     private CustomerService service;
 
+
     @ApiOperation(value = "Retorna uma lista de usuários")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de usuários"),
