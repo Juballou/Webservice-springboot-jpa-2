@@ -21,8 +21,8 @@ public class Phone implements Serializable {
     private Integer number;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "phones")
-    private Set<Customer> customers = new HashSet<>();
+    @ManyToOne
+    private Customer customer;
 
     public Phone() {
     }
@@ -33,12 +33,12 @@ public class Phone implements Serializable {
         this.number = number;
     }
 
-    public Set<Customer> getCustomers() {
-        return customers;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public static long getSerialVersionUID() {
